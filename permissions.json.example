@@ -1,0 +1,18 @@
+{
+	"global":{
+		"eval": false,
+		"pullanddeploy": false
+	},
+	"users":{
+		"userid":{
+			"eval": false,
+			"pullanddeploy": true
+		}
+	},
+	"roles":{
+		"roleid":{
+			"eval": true,
+			"pullanddeploy": false
+		}
+	}
+}
