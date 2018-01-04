@@ -198,13 +198,11 @@ function getStreams(commid,client,msg,pagination){
            
            getUserNames(Stream_data,client,msg); //Sends off to get more information to make the multistre.am link
            getStreams(commid,client,msg,pagination); //Calls current function with Pagination to being up next grouping of results (if there are any)
-           
            }},
            error: function(err){
            console.log("Error has occured at getStreams: "+ JSON.stringify(err,null,2)+"\n");
            }
            });
-    //}
 }
 
 function getUserNames(data,client,msg){
@@ -258,9 +256,7 @@ function formatLink(stream,msg){
         baseurl += stream.data[i].name+'/';
     }
     msg.channel.send("**"+ stream.link +" "+baseurl+" ** @everyone");
-    //console.log("Length of 'Streamers': "+User_data.length);
-    
-    
+    //console.log("Length of 'Streamers': "+User_data.length);    
 }
 
 //Used to append new information to [guild].json file

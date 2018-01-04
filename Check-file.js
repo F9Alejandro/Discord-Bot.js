@@ -1,6 +1,6 @@
 var fs = require('fs');
 var check = require('syntax-error');
-var file = __dirname + '/plugins/Multi\ Stream/stream.js';
+var file = __dirname + '/plugins/Misc/misc.js';
 var src = fs.readFileSync(file);
 
 var err = check(src, file);

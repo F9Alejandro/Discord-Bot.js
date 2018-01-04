@@ -45,7 +45,7 @@ for( var i=0; i<dangerousCommands.length;i++ ){
 	}
 }
 Permissions.checkPermission = function (msg,permission){
-    console.log('User ID of person running command: '+msg.member.user.id+' username: '+msg.member.user.username);
+    console.log('User ID of person running command: '+msg.author.id+' username: '+msg.author.username);
     try {
 		var allowed = true;
 		try{
@@ -54,19 +54,26 @@ Permissions.checkPermission = function (msg,permission){
 			}
 		} catch(e){}
 		try{
-			if(Permissions.users[msg.member.user.id].hasOwnProperty(permission)){
-				allowed = Permissions.users[msg.member.user.id][permission] === true;
+			if(Permissions.users[msg.author.id].hasOwnProperty(permission)){
+				allowed = Permissions.users[msg.author.id][permission] === true;
                 return allowed;
 			}
 		} catch(e){}
         try{
             if(typeof msg.member != 'undefined'){
                 var roles = msg.member.roles;
+                //console.log("contents of roles: "+roles);
                 for (let rol of roles){
-                    if(Permissions.roles[rol.id].hasOwnProperty(permission)){ allowed = Permissions.roles[rol.id][permission] === true; }
+                    //console.log("Content of rol: "+rol[0]+" typeof rol: "+typeof rol);
+                    try{
+                        if(Permissions.roles[rol[0]].hasOwnProperty(permission)){
+                            allowed = Permissions.roles[rol[0]][permission] === true;
+                            break;
+                        }
+                    }catch(e){}
                 }
             }
-        } catch(e){}
+        } catch(e){ console.log("Error Role perm: "+e); }
 		return allowed;
 	} catch(e){}
 	return false;
@@ -146,7 +153,7 @@ var commands = {
         description: "sets bot status to idle",
         process: function(bot,msg,suffix){ 
 	    bot.user.setStatus("idle");
-	    bot.user.setGame(suffix);
+	    bot.user.setGame(suffix).catch(err => console.log(err));
 	}
     },
     "online": {
@@ -154,7 +161,7 @@ var commands = {
         description: "sets bot status to online",
         process: function(bot,msg,suffix){ 
 	    bot.user.setStatus("online");
-	    bot.user.setGame(suffix);
+	    bot.user.setGame(suffix).catch(err => console.log(err));
 	}
     },
     "say": {

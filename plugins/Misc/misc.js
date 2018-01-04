@@ -1,7 +1,7 @@
 exports.commands = [
 	"twitch",
 	"beam",
-	"chuckNorris"
+	"chuckNorris",
 	"watchtogether"
 ]
 
